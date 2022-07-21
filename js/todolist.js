@@ -144,7 +144,7 @@ function addNewandEditRowClosure(rSno){
                 displayMessage("Please give the input values.",'failed');
                 return false;
             } else if ( new Date(duedate) <= dateBeforeCurrentDate() ){
-                displayMessage("Give Due Date is greater than current date.",'failed');
+                displayMessage("Give Due Date is current date or greater than current date.",'failed');
                 return false;
             }
             addRowTemplate(); 
@@ -188,7 +188,7 @@ function addNewandEditRowClosure(rSno){
                     taskTables[0][`${clsName}`].push({"sno":sno.toString(),"description":description,"duedate":dateFormatter(duedate),"status":"","remarks":""});
             } else{
                 $('.'+clsName).find('#desc_'+rowId).text(description);
-                $('.'+clsName).find('#duedate'+rowId).text(dateFormatter(duedate));
+                $('.'+clsName).find('#duedate_'+rowId).text(dateFormatter(duedate));
                 let sno = ($('.'+clsName).find('#desc_'+rowId).closest('tr').find('.sno').text()).trim();
                 taskTables[0][`${clsName}`][parseInt(sno)-1].description = description;
                 taskTables[0][`${clsName}`][parseInt(sno)-1].duedate = dateFormatter(duedate);

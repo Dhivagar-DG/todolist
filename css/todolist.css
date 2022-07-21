@@ -1,0 +1,117 @@
+    body{
+        margin: 0;
+    }
+    .table-striped tbody > tr:nth-child(odd){
+        background: lightblue;
+    }
+    .table-striped tbody > tr:nth-child(even){
+        background: rgb(169, 233, 210);
+    }
+    button:hover , i:hover{
+        transform: scale(1.05);
+        transition: 0.6s !important;
+        outline: none;
+    }
+    button , i{
+        outline: none;
+        transition: 0.6s !important;
+        cursor: pointer;
+    }
+    #submitBtn{
+        position: fixed;
+        top: 90vh;
+        box-shadow: 0 0 10px 10px lightslategrey;
+    }
+    #home{
+        position: fixed;
+        top: 0;
+        right: 0;
+        box-shadow: 0 0 10px 10px lightslategrey;
+    }
+    #inprogressBTN{
+        position: fixed;
+        top: 40vh; left: 0;
+        box-shadow: 0 0 10px 10px lightslategrey;
+        transition: 1s;
+    }
+    #inprogressBTN:hover::after{
+        transform: transition;
+        content:"Unlock Inprogress Task";
+    }
+    #completedBtn{
+        position: fixed;
+        top: 80vh;right: 2px;
+        box-shadow: 0 0 10px 10px lightslategrey;
+        transition: 1s;
+    }
+    #completedBtn:hover::after{
+        content: "Show Submitted Status";
+    }
+    body{
+        background: rgb(217, 216, 216);
+    }
+    .card-body{
+        background: rgb(232, 231, 231);
+    }
+    div{
+        border-radius: 5px;
+    }
+    .addBtn:hover{
+        border: none;
+    }
+    .addBtn , .removeTbl{
+        border:none
+    }
+    .bs-card:hover{
+        opacity: 1;
+        transition: 0.8s;
+    }
+    .bs-card{
+        opacity: 0.8;
+        transition: 0.8s;
+    }
+    .loader{
+        position: absolute;
+        margin-left: -12px;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 7000;
+        background:linear-gradient(130deg,#1482a0, #3fb379);
+        transition: 1s;
+    }
+    .quick{
+        background:linear-gradient(130deg,#b62012, #38b611);
+        background:linear-gradient(130deg,#1482a0, #980270);
+        padding: 5px;
+        border-radius: 25px;
+    }
+    @media only screen and (max-width: 768px){
+    .task_body{
+        padding: 2px !important;
+    }
+    .task_body .card{
+        margin-top: 1rem !important;
+        margin-bottom:  1rem !important;
+    }
+}
+body{
+    background: rgb(56, 54, 61);
+}
+.dropdown-menu{
+    margin-top: -2px !important;
+}
+.gearBig{
+    animation: gearbig 5s linear infinite;
+    color: #980270;
+}
+@keyframes gearbig{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg)
+    }  
+}
+
+

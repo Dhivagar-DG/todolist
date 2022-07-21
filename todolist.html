@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO_DO_LIST</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="fontawesome/css/all.css">
+    <link rel="stylesheet" href="css/todolist.css">
+</head>
+<body onload="loader()">
+
+
+    <!-- MAIN CONTAINER -->
+    <div class="container-fluid root">
+        <div class="loader">
+        </div>
+        <div class="row p-5 text-white" id="hero_home" style="background:linear-gradient(130deg,#1482a0, #ea6e01) !important">
+            <div class="col-md-4">
+                <h3><i class="fa-solid fa-list-check me-2 text-danger"></i>Project To Do List<i class="fa-solid fa-gear gearBig ms-1"></i></h3>
+            </div>
+            <div class="col-md-8">
+                <div class="card card-rounded mt-0 hero-card" style="
+                    background: linear-gradient(-130deg,#930772,royalblue);transition:1.4s;">
+                    <div class="card-body" style="background: transparent !important;">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <button class="btn text-white" type="button" id="addTblBtn" style="background:linear-gradient(130deg,#1482a0, #ea6e01)"><i class="fa-solid fa-table me-2"></i>Add Task Table</button>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="quick-table float-end mt-2">
+                                    <button class="btn btn-info dropdown dropdown-toggle" type="button" data-bs-toggle="dropdown">Quick View</button>
+                                    <div class="dropdown-menu">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ADDING PLACE OF TASK TABLE -->
+        <div class="row task_body p-5 mt-1" style="background: linear-gradient(-45deg,#632d56,#44abc8); ">
+        </div>
+        <button class="btn btn-primary d-none ms-2" type="button" id="submitBtn"><i class="fa-regular fa-paper-plane text-white me-2"></i>Submit Selected</button>
+        <button class="btn ms-2 text-white" type="button" id="completedBtn" style="background: linear-gradient(-130deg,#930772,royalblue);"><i class="fa-solid fa-clipboard-check text-info me-2"></i></button>
+        <a class="btn ms-2 d-none" href="#hero_home" type="button" id="home" style="background:linear-gradient(-130deg,#1482a0, #ea6e01);"><i class="fa-solid fa-house-chimney"></i></a>
+        <button class="btn btn-secondary my-3 d-none" type="button" id="inprogressBTN"><i class="fa-solid fa-lock-open  me-2 text-primary"></i></button>    
+    </div>
+
+
+    <!-- TASK TABLE -->
+    <div class="card base-tbl-card bs-card d-none my-4 p-0 border-info">
+        <div class="card-header text-white" style="background:linear-gradient(130deg,#930772,royalblue);">
+            <div class="card-title d-flex justify-content-between">
+
+            </div>
+        </div>
+        <div class="card-body" style="background:linear-gradient(185deg,#cccdcd, #3fb379);">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped table-rounded text-center p-2 overflowY-hidden">
+                    <thead class="table-thead bg-primary rounded">
+                        <tr>
+                            <th class="col-1 ">
+                            </th>                            
+                            <th class="col-1">
+                                <p class="card-text text-center" style="font-size: 15px;font-weight:600">Sno</p> 
+                            </th>
+                            <th class="col-2 desc">
+                                <p class="card-text text-center" style="font-size: 15px;font-weight:600">Description</p> 
+                            </th>
+                            <th class="col-2 duedate">
+                                <p class="card-text text-center" style="font-size: 15px;font-weight:600">Due Date</p> 
+                            </th>
+                            <th class="col-2 status">
+                                <p class="card-text text-center" style="font-size: 15px;font-weight:600">Status<span class="text-danger">*</span></p> 
+                            </th>
+                            <th class="col-2 _remarks">
+                                <p class="card-text text-center" style="font-size: 15px;font-weight:600">Remarks</p> 
+                            </th>
+                            <th class="col-1 edit">
+                            </th>                        
+                            <th class="col-1 reject">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <table class="tblRow_tr d-none">
+        <tbody>
+            <tr class="mt-2">
+                <td>
+                    <input type="checkbox" class="form-check-input doneCheckBox" onclick="checkEvent(this)" name="doneCheckBox">
+                </td>
+                <td>
+                    <span class="sno"></sno>
+                </td>
+                <td style="word-break:break-all;">
+                    <p class="text-center description" ></p>
+                </td>
+                <td>
+                    <p class="text-center duedate"></p>
+                </td>
+                <td>
+                    <select name="status" class="form-select _status" onchange="inputKeyEvents(this)" data-bs-toogle="dropdown">
+                        <option value="" selected>Select Status</option>
+                        <option value="1">In Progress</option>
+                        <option value="2">Completed</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" name="remarks" onkeyup="inputKeyEvents(this)" class="form-control _remarks">
+                </td>
+                <td style="vertical-align:middle">
+                    <span class="edit" onclick="editTask(this)" title="Edit Task"><i class="fa-regular fa-pen-to-square text-success"></i></span>
+                </td>
+                <td style="vertical-align:middle;">
+                    <span class="removetsk" onclick="removeTask(this)" data-bs-toggle="tooltip" data-bs-placement="left" title="Remove task"><i class="fa-solid fa-circle-xmark text-danger"></i></span> 
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- TASK TABLE MODAL -->
+    <div class="modal fade" id="tbl_modal" data-bs-backdrop="static" data-bs-keyboard="false"  style="background:linear-gradient(130deg,#1482a0, #3fb379);">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="card mt-3" style="background:linear-gradient(130deg,#1482a0, #3fb379);">
+                        <div class="card-header d-flex" style="background:linear-gradient(130deg,#1482a0, #3fb379);">
+                            <div class="card-title"><h3>Task Wise Table</h3></div>
+                        </div>
+                        <div class="card-body mt-3">
+                            <label for="tskTblName" class="form-label">Task Wise Table Name</label>
+                            <input type="text" class="form-control" name="tskTblName" id="tskTblName"  maxlength="20" placeholder="Enter Table name..">
+                            <button class="btn btn-primary mt-3 ms-2 float-end" data-bs-dismiss="modal" type="button">Close</button>
+                            <button class="btn btn-success mt-3 float-end" id="createTblModalBtn" type="button"><i class="fa-solid fa-folder-plus text-info me-2"></i>Create</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- TASK DATA MODAL -->
+    <div class="modal fade" id="row_modal" data-bs-backdrop="static" data-bs-keyboard="false" style="background:linear-gradient(130deg,#1482a0, #3fb379);">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="card mt-3" style="background:linear-gradient(130deg,#1482a0, #3fb379);">
+                        <div class="card-header d-flex" style="background:linear-gradient(130deg,#1482a0, #3fb379);">
+                            <div class="card-title"><h3>Task data</h3></div>
+                        </div>
+                        <div class="card-body mt-3">
+                            <label for="taskDesc" class="form-label">Task Description</label>
+                            <input type="text" class="form-control" name="taskDesc" id="taskDesc" placeholder="Enter Task Description..">
+                            <label for="duedate mt-2" class="form-label">Due Date</label>
+                            <input type="date" class="form-control w-50" name="duedate" id="duedate">
+                            <button class="btn btn-primary mt-3 ms-2 float-end close" data-bs-dismiss="modal" type="button">Close</button>
+                            <button class="btn btn-success mt-3 float-end" id="addTaskBtn" type="button"><i class="fa-solid fa-circle-plus text-info me-2"></i>Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- REMOVE TASK MODAL -->
+    <div class="modal fade" id="remove_modal" data-bs-backdrop="static" data-bs-keyboard="false" style="background:linear-gradient(130deg,#1482a0, #3fb379);">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="card mt-3">
+                        <div class="card-body mt-3">
+                            <div class="row">
+                                <label for="remove" class="form-label text-center text-primary text-lg"><h4>Are you sure want to remove this task</h4></label>
+                            </div>
+                            <div class="row text-center my-5">
+                                <span class="question">
+                                    <i class="fa-regular fa-circle-question fa-xl" style="font-size: 80px; font-weight:500; color: #3baf7d;"></i>
+                                </span>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <button class="btn btn-success float-end removeyes" data-bs-dismiss="modal" type="button">Yes</button>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-secondary float-start" data-bs-dismiss="modal" type="button">No</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Task Status Table -->
+    <div class="modal fade modal-xl" id="status_modal" data-bs-backdrop="static" data-bs-keyboard="false" style="background:linear-gradient(130deg,#1482a0, #3fb379);">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="card mt-3">
+                        <div class="card-header" style="background:linear-gradient(130deg,#1482a0, #3fb379);">
+                            <div class="card-title">
+                                <h6>Task Table</h6>
+                            </div>
+                        </div>
+                        <div class="card-body mt-3">
+                            <div class="table-responsive" style="overflow-y: scroll; max-height:70vh;">
+                                <table class="table table-striped csvTask table-hover">
+                                    <thead class="bg-primary text-white">
+                                        <th>Sno</th>
+                                        <th>Description</th>
+                                        <th>DueDate</th>
+                                        <th>Status</th>
+                                        <th>Remarks</th>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center" style="background:linear-gradient(130deg,#1482a0, #3fb379);">
+                            <button class="btn btn-success text-white" type="button" id="downloadCSV"><i class="fa-solid fa-cloud-arrow-down text-info me-2"></i>Download<small class="text-muted"> (CSV)</small></button>
+                            <button class="btn btn-secondary text-white" type="button" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="submitTblBody d-none">
+        <table>
+            <tr class="taskData">
+                <td class="sno"></td>
+                <td class="desc" style="word-break:break-all"></td>
+                <td class="duedate"></td>
+                <td class="status"></td>
+                <td class="remarks" style="word-break:break-all"></td>
+            </tr>
+            <tr class="taskTitle">
+            </tr>
+        </table>
+    </div>
+    
+    <!-- Toast For Error msg -->
+    <div class="toast tst position-fixed text-white text-center" style="font-weight:400; font-size:20px; top:6%; left: 50%; transform: translate(-50%,-50%); z-index:7000; opacity: 0.8;" id="toastID">
+        <div class="toast-body tstBody"></div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script src="js/jquery-min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/popper-min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/table2csv.min.js"></script>
+    <script src="js/todolist.js"></script>
+</body>
+</html>

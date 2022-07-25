@@ -374,7 +374,7 @@ $('#completedBtn').click(()=>{
         let d = {
             description : $(data).find(".description").text(),
             duedate : $(data).find(".duedate").text(),
-            status : $(data).find('#status').val() == 1 ? "In Progress" : "Completed",
+            status : $(data).find('._status').val() == 1 ? "In Progress" : "Completed",
             remarks : $(data).find("._remarks").val()
         }
         

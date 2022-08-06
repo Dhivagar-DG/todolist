@@ -108,7 +108,6 @@ $('#addTaskBtn').click(()=>{
             return false;
         }  
         addNewandEditRow("edit");
-        edit = false;
     } else addNewandEditRow("new");
     
 });
@@ -193,6 +192,7 @@ function addNewandEditRowClosure(rSno){
                 taskTables[0][`${clsName}`][parseInt(sno)-1].description = description;
                 taskTables[0][`${clsName}`][parseInt(sno)-1].duedate = dateFormatter(duedate);
                 $('#row_modal').modal('hide');
+                edit = false;
                 displayMessage('Updated Successfully..!!','success');
             }
             $('#row_modal').modal('hide');

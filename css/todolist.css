@@ -19,7 +19,7 @@
     }
     #submitBtn{
         position: fixed;
-        top: 90vh;
+        top: 80vh;
         box-shadow: 0 0 10px 10px lightslategrey;
     }
     #home{
